@@ -15,18 +15,16 @@ public class MyLinkedList{
 
  
  public boolean add(String value){
-
- if (size == 0) {
-  start = new Node(value);
-  end = new Node(value);
-  size++;
-  return true;
- }
- else{
-end.setNext(new Node(value));
-end = end.getNext();
+Node n = new Node(value);
+if(size == 0){
+start = n;
+end = n;} 
+else{
+end.setNext(n);
+end = n;}
 size++;
-return true;}}
+return true;
+	}
 
 
 
@@ -53,17 +51,15 @@ return true;}}
  if(index < 0 || index >= size) {
      throw new IndexOutOfBoundsException(" it's out of bounds");
  }
- Node current = start;
- for(int i = 0; i < index; i++){
-   current = current.getNext();
- }
- return current.getData();}
+return getNode(index).getData();
+}
 
 
 
  public void add(int index, String value){
-   if (index < 0 || index > size) 
-   throw new IndexOutOfBoundsException("it is out of bounds");
+   if(index < 0 || index > size) {
+       throw new IndexOutOfBoundsException(" it's out of bounds");
+   }
    
    if (index == size()){
       add(value);
@@ -72,7 +68,7 @@ return true;}}
    if(index == 0){
      Node temp = new Node(value);
      temp.setNext(start);
-     start.setPrev(end);
+     start.setPrev(temp);
      start = temp;
      size ++;
 
@@ -111,6 +107,8 @@ NN.setPrev(current.getPrev());
 
 
  private Node getNode(int index) {
+   if(index < 0 || index >= size) 
+       throw new IndexOutOfBoundsException(" it's out of bounds");
     Node current = start;
     for(int i = 0; i < index; ++i) {
         current = current.getNext();
@@ -126,3 +124,6 @@ NN.setPrev(current.getPrev());
  
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
+
+
+
