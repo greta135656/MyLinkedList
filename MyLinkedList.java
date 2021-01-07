@@ -37,15 +37,13 @@ return true;}}
        result += current.getData();
        current = start.getNext();
        if (start.getNext() != null){
-         result += ", "
+         result += ", ";
        }
      }
      
      result = result + "]";
      return result;
    }
-
-
 
    
  
@@ -57,25 +55,42 @@ return true;}}
  }
  Node current = start;
  for(int i = 0; i < index; i++){
-   currrent = currennt.getNext();
+   current = current.getNext();
  }
  return current.getData();}
 
 
 
  public void add(int index, String value){
-   if (index > size) 
+   if (index < 0 || index > size) 
    throw new IndexOutOfBoundsException("it is out of bounds");
    
    if (index == size()){
-     return add(value);
+      add(value);
    }
 
    if(index == 0){
      Node temp = new Node(value);
-     start.setPrev(temp);
+     temp.setNext(start);
+     start.setPrev(end);
+     start = temp;
+     size ++;
+
+     
+   } else{
+ Node current = getNode(index);
+ Node NN = new Node(value);
+NN.setPrev(current.getPrev());
+ NN.setNext(current);
+ current.getPrev().setNext(NN);
+ current.setPrev(NN);
+ 
+ size++;
+
+
      
    }
+   
 
    }
  
@@ -89,7 +104,7 @@ return true;}}
    Node current = getNode(index);
    String result = current.getData();
    current.setData(value);
-   return result
+   return result;
    
  }
 
