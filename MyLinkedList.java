@@ -20,25 +20,33 @@ public class MyLinkedList{
   start = new Node(value);
   end = new Node(value);
   size++;
+  return true;
  }
  else{
 end.setNext(new Node(value));
 end = end.getNext();
-size++;}
-return true;}
+size++;
+return true;}}
 
-   size++;}
-   return true;
-   
- }
- public void add(int index, String value){
-   if (index > size) 
-   throw new IndexOutOfBoundsException("it is out of bounds");
-   if (index == size()){
-     return add(value);
+
+
+   public String toString(){
+     String result = "[";
+     Node current = start;
+     for(int i = 0; i < size; i++){
+       result += current.getData();
+       current = start.getNext();
+       if (start.getNext() != null){
+         result += ", "
+       }
+     }
+     
+     result = result + "]";
+     return result;
    }
 
-   }
+
+
    
  
 
@@ -52,6 +60,24 @@ return true;}
    currrent = currennt.getNext();
  }
  return current.getData();}
+
+
+
+ public void add(int index, String value){
+   if (index > size) 
+   throw new IndexOutOfBoundsException("it is out of bounds");
+   
+   if (index == size()){
+     return add(value);
+   }
+
+   if(index == 0){
+     Node temp = new Node(value);
+     start.setPrev(temp);
+     
+   }
+
+   }
  
 
 
@@ -60,25 +86,26 @@ return true;}
    if(index < 0 || index >= size) {
        throw new IndexOutOfBoundsException(" it's out of bounds");
    }
+   Node current = getNode(index);
+   String result = current.getData();
+   current.setData(value);
+   return result
    
  }
+
+
+
+ private Node getNode(int index) {
+    Node current = start;
+    for(int i = 0; i < index; ++i) {
+        current = current.getNext();
+    }
+    return current;
+}
 
 
  
- public String toString(){
-   String result = "[";
-   Node current = start;
-   for(int i = 0; i < size; i++){
-     result += current.getData();
-     current = start.getNext();
-     if (start.getNext() != null){
-       result += ", "
-     }
-   }
-   
-   result = result + "]";
-   return result;
- }
+
 
 
  
