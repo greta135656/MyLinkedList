@@ -15,13 +15,12 @@ public class MyLinkedList{
 
  
  public boolean add(String value){
-Node n = new Node(value);
 if(size == 0){
-start = n;
-end = n;} 
+start = new Node(value);
+end = new Node(value);} 
 else{
-end.setNext(n);
-end = n;}
+end.setNext(new Node(value));
+end = new Node(value);;}
 size++;
 return true;
 	}
