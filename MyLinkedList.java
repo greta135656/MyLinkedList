@@ -13,68 +13,74 @@ public class MyLinkedList{
    return size;
  }
 
- 
- public boolean add(String value){
-if(size==0){
- start = new Node(value);}
-else if (size == 1){
-  end = new Node(value);
-  end.setPrev(start);
-  end.setData(value);
-  start.setNext(end);
-}
-else{
-  Node oldEnd = end;
-  end = new Node(value);
-  oldEnd.setNext(end);
-  end.setPrev(oldEnd);
-}
-size++;
-return true;
-	}
 
-
-   
- 
-
- 
  public String get(int index){
  if(index < 0 || index >= size) {
-     throw new IndexOutOfBoundsException(" it's out of bounds");
- }
+     throw new IndexOutOfBoundsException(" it's out of bounds");}
 return getNode(index).getData();
 }
 
 
+	public boolean add(String value) {
+		if (size == 0) {
+			start = new Node(value);
 
- public void add(int index, String value){
-   if(index < 0 || index >= size) {
-       throw new IndexOutOfBoundsException(" it's out of bounds");
-   }
+		} else 
+    if (size == 1) {
+			end = new Node(value);
+			start.setNext(end);
+			end.setPrev(start);}
+      
+		 else {
+			Node old = end;
+			end = new Node(value);
+			oldEnd.setNext(end);
+			end.setPrev(old);}
+		size++;
+		return true;
+	}
 
-   if (index == size()){
-      add(value);
-   }
 
-   if (index == 0) {
-   Node old = start;
-   start = new Node(value);
-   start.setNext(old);
-   old.setPrev(start);}
 
-   else{
- Node current = start;
- Node NN = new Node(value);
-NN.setPrev(current.getPrev());
- NN.setNext(current);
- current.getPrev().setNext(NN);
- current.setPrev(NN);}
+	public String toString(){
+		if(size == 0){
+			return "[]";}
+      
+		String result = "[" + start.getData();
+		Node temp = start;
+		while(temp != end){
+			tmp = temp.getNext();
+			ret += ", " + temp.getData();
+		}
+		return result + "]";
+	}
+
+   
  
- size++;
 
 
-     
-   }
+
+	public void add(int index, String value) {
+		if (index < 0 || index > size()) throw new IndexOutOfBoundsException("Index out of bounds");
+		if (index == size()) {
+			add(value);
+			return;
+		}
+		if (index == 0) {
+			Node oldStart = start;
+			start = new Node(value);
+			start.setNext(oldStart);
+			oldStart.setPrev(start);
+		} else {
+			Node current = getNode(index);
+			Node newNode = new Node(value);
+			newNode.setNext(current);
+			newNode.setPrev(current.getPrev());
+			current.getPrev().setNext(newNode);
+			current.setPrev(newNode);
+		}
+		size++;
+	}
    
 
    
@@ -109,19 +115,24 @@ NN.setPrev(current.getPrev());
 }
 
 
-    public String toString(){
-        Node current = start;
-        String toString = "";
-        while(current!= null)
-	{
-            toString += current.getData();
-            current = current.getNext();
-		
-            if(current!=null)
-	    {
-                toString+=", ";
-	    }}
-        return "[" + toString + "]";
+public String toStringReversed() {
+  if (size == 0) 
+  return "[]";
+  
+  
+  String result = "[";
+  Node current = end;
+  
+  while (current != null) {
+    result += current.getData();
+    if (current.getPrev() != null) {
+      result += ", ";
     }
+    
+    current = current.getPrev();
+  }
+  
+  result += "]";
+  return result;
 }
 
