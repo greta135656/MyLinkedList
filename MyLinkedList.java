@@ -21,45 +21,7 @@ return getNode(index).getData();
 }
 
 
-	public boolean add(String value) {
-		if (size == 0) {
-			start = new Node(value);
-
-		} else 
-    if (size == 1) {
-			end = new Node(value);
-			start.setNext(end);
-			end.setPrev(start);}
-      
-		 else {
-			Node old = end;
-			end = new Node(value);
-			oldEnd.setNext(end);
-			end.setPrev(old);}
-		size++;
-		return true;
-	}
-
-
-
-	public String toString(){
-		if(size == 0){
-			return "[]";}
-      
-		String result = "[" + start.getData();
-		Node temp = start;
-		while(temp != end){
-			tmp = temp.getNext();
-			ret += ", " + temp.getData();
-		}
-		return result + "]";
-	}
-
-   
- 
-
-
-
+	
 	public void add(int index, String value) {
 		if (index < 0 || index > size()) throw new IndexOutOfBoundsException("Index out of bounds");
 		if (index == size()) {
@@ -81,6 +43,43 @@ return getNode(index).getData();
 		}
 		size++;
 	}
+	
+
+
+	public String toString(){
+		if(size == 0){
+			return "[]";}
+      
+		String result = "[" + start.getData();
+		Node temp = start;
+		while(temp != end){
+			temp = temp.getNext();
+			result += ", " + temp.getData();
+		}
+		return result + "]";
+	}
+
+   
+ 	public boolean add(String value) {
+		if (size == 0) {
+			start = new Node(value);
+
+		} else 
+    if (size == 1) {
+			end = new Node(value);
+			start.setNext(end);
+			end.setPrev(start);}
+      
+		 else {
+			Node old = end;
+			end = new Node(value);
+			old.setNext(end);
+			end.setPrev(old);}
+		size++;
+		return true;
+	}
+
+
    
 
    
@@ -134,5 +133,59 @@ public String toStringReversed() {
   
   result += "]";
   return result;
+}
+
+public void extend(MyLinkedList other){
+  this.end.setNext(other.start);
+  other.start.setPrev(this.end);
+  this.end = other.end;
+  other.start = null;
+  other.end = null;
+  this.size +=  other.size();
+  other.size = 0;
+}
+
+
+public String remove(int index){
+  if(index < 0 || index >= size)
+  throw new IndexOutOfBoundsException();
+  size--;
+  
+  if(size == 1){
+    String result = start.getData();
+    start = null;
+    start = null;
+    return result;
+  }
+
+  if (index == 0){
+    String result = start.getData();
+    start = start.getNext();
+    start.setPrev(null);
+    return result;}
+
+  if (index == size-1){
+    String result = end.getData();
+    end = end.getPrev();
+    end.setNext(null);
+    return result;
+  } 
+  else {
+  Node toRemove = getNode(index);
+    String result = toRemove.getData();
+  toRemove.getNext().setPrev(toRemove.getPrev());
+  toRemove.getPrev().setNext(toRemove.getNext());
+    return result;
+  }
+}
+
+
+
+ 
+
+
+
+ 
+ //Any helper method that returns a Node object MUST BE PRIVATE!
 }
 
