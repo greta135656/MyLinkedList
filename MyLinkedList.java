@@ -20,47 +20,8 @@ public class MyLinkedList{
 return getNode(index).getData();
 }
 
- //Any helper method that returns a Node object MUST BE PRIVATE!
-	
-	public void add(int index, String value) {
-		if (index < 0 || index > size()) throw new IndexOutOfBoundsException("Index out of bounds");
-		if (index == size()) {
-			add(value);
-			
-		}
-		if (index == 0) {
-			Node oldStart = start;
-			start = new Node(value);
-			start.setNext(oldStart);
-			oldStart.setPrev(start);
-		} else {
-			Node current = getNode(index);
-			Node newNode = new Node(value);
-			newNode.setNext(current);
-			newNode.setPrev(current.getPrev());
-			current.getPrev().setNext(newNode);
-			current.setPrev(newNode);
-		}
-		size++;
-	}
-	
 
-
-	public String toString(){
-		if(size == 0){
-			return "[]";}
-      
-		String result = "[" + start.getData();
-		Node temp = start;
-		while(temp != end){
-			temp = temp.getNext();
-			result += ", " + temp.getData();
-		}
-		return result + "]";
-	}
-
-   
- 	public boolean add(String value) {
+	public boolean add(String value) {
 		if (size == 0) {
 			start = new Node(value);
 
@@ -80,6 +41,49 @@ return getNode(index).getData();
 	}
 
 
+
+	public String toString(){
+		if(size == 0){
+			return "[]";}
+      
+		String result = "[" + start.getData();
+		Node temp = start;
+		while(temp != end){
+			temp = temp.getNext();
+			result += ", " + temp.getData();
+		}
+		return result + "]";
+	}
+
+   
+ 
+
+
+
+	public void add(int index, String value) {
+		if (index < 0 || index > size()) throw new IndexOutOfBoundsException("Index out of bounds");
+		if (index == size()) {
+			add(value);
+return;
+			
+		}
+		if (index == 0) {
+			Node oldStart = start;
+			start = new Node(value);
+			start.setNext(oldStart);
+			oldStart.setPrev(start);
+size++;
+		} else {
+			Node current = getNode(index);
+			Node newNode = new Node(value);
+			newNode.setNext(current);
+			newNode.setPrev(current.getPrev());
+			current.getPrev().setNext(newNode);
+			current.setPrev(newNode);
+size++;
+		}
+		
+	}
    
 
    
@@ -151,7 +155,7 @@ public String remove(int index){
   throw new IndexOutOfBoundsException();
   size--;
   
-  if(size == 1){
+  if(size()+1 == 1){
     String result = start.getData();
     start = null;
     start = null;
@@ -186,6 +190,6 @@ public String remove(int index){
 
 
  
-
+ //Any helper method that returns a Node object MUST BE PRIVATE!
 }
 
