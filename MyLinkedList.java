@@ -20,13 +20,13 @@ public class MyLinkedList{
 return getNode(index).getData();
 }
 
-
+ //Any helper method that returns a Node object MUST BE PRIVATE!
 	
 	public void add(int index, String value) {
 		if (index < 0 || index > size()) throw new IndexOutOfBoundsException("Index out of bounds");
 		if (index == size()) {
 			add(value);
-			return;
+			
 		}
 		if (index == 0) {
 			Node oldStart = start;
@@ -186,6 +186,6 @@ public String remove(int index){
 
 
  
- //Any helper method that returns a Node object MUST BE PRIVATE!
+
 }
 
